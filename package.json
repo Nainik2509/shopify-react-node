@@ -1,0 +1,35 @@
+{
+  "name": "shopify-react-node",
+  "version": "1.0.0",
+  "description": "Shopify integration with Nodejs and ReactJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nainik2509/shopify-react-node.git"
+  },
+  "keywords": [
+    "Shopify",
+    "ReactJs",
+    "NodeJs",
+    "Shopify App"
+  ],
+  "author": "Nainik Mehta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nainik2509/shopify-react-node/issues"
+  },
+  "homepage": "https://github.com/Nainik2509/shopify-react-node#readme",
+  "dependencies": {
+    "@shopify/koa-shopify-auth": "^5.0.3",
+    "dotenv": "^16.0.0",
+    "isomorphic-fetch": "^3.0.0",
+    "koa": "^2.13.4",
+    "koa-router": "^10.1.1",
+    "next": "^12.1.5",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  }
+}
