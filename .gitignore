@@ -1,8 +1,8 @@
 build
 node_modules
 dist
-history
-
+.history
+.next
 
 # local env files
 .env.local
