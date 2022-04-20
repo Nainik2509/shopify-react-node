@@ -9,6 +9,12 @@ const {
 const { default: Shopify, ApiVersion } = require("@shopify/shopify-api");
 const Router = require("koa-router");
 
+const {
+  storeCallback,
+  loadCallback,
+  deleteCallback,
+} = require("./server/database");
+
 dotenv.config();
 
 Shopify.Context.initialize({
@@ -19,7 +25,11 @@ Shopify.Context.initialize({
   API_VERSION: ApiVersion.January22,
   IS_EMBEDDED_APP: true,
   // More information at https://github.com/Shopify/shopify-node-api/blob/main/docs/issues.md#notes-on-session-handling
-  SESSION_STORAGE: new Shopify.Session.MemorySessionStorage(),
+  SESSION_STORAGE: new Shopify.Session.CustomSessionStorage(
+    storeCallback,
+    loadCallback,
+    deleteCallback
+  ),
 });
 
 const port = parseInt(process.env.PORT, 10) || 3000;
