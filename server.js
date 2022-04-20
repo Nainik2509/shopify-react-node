@@ -15,8 +15,8 @@ Shopify.Context.initialize({
   API_KEY: process.env.SHOPIFY_API_KEY,
   API_SECRET_KEY: process.env.SHOPIFY_API_SECRET,
   SCOPES: process.env.SHOPIFY_API_SCOPES.split(","),
-  HOST_NAME: process.env.SHOPIFY_API_KEY.replace(/https:\/\//, ""),
-  API_VERSION: ApiVersion.October20,
+  HOST_NAME: process.env.SHOPIFY_APP_URL.replace(/https:\/\//, ""),
+  API_VERSION: ApiVersion.January22,
   IS_EMBEDDED_APP: true,
   // More information at https://github.com/Shopify/shopify-node-api/blob/main/docs/issues.md#notes-on-session-handling
   SESSION_STORAGE: new Shopify.Session.MemorySessionStorage(),
@@ -39,7 +39,10 @@ app.prepare().then(() => {
       afterAuth(ctx) {
         const { shop, scope } = ctx.state.shopify;
         ACTIVE_SHOPIFY_SHOPS[shop] = scope;
-        ctx.redirect("/");
+
+        if (ACTIVE_SHOPIFY_SHOPS[shop])
+          ctx.redirect(`https://${shop}/admin/apps`);
+        else ctx.redirect(`/?shop=${shop}`);
       },
     })
   );
@@ -60,9 +63,10 @@ app.prepare().then(() => {
     }
   });
 
+  router.get("(.*)", handleRequest);
   router.get("(/_next/static/.*)", handleRequest);
   router.get("/_next/webpack-hmr", handleRequest);
-  router.get("(.*)", handleRequest);
+  router.get("(.*)", verifyRequest(), handleRequest);
 
   server.use(router.allowedMethods());
   server.use(router.routes());
