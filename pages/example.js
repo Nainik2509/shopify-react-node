@@ -1,15 +1,17 @@
 import { Layout, Card, Page, TextStyle } from "@shopify/polaris";
 
-const Index = () => {
+const Example = () => {
   return (
     <Page>
       <Layout>
         <Layout.AnnotatedSection
-          title="Title Here"
-          description="This is just the example Description here"
+          title="Example Page"
+          description="This is just the example page"
         >
           <Card>
-            <TextStyle variation="strong">Pondir</TextStyle>
+            <div>
+              <TextStyle variation="strong">Pondir Example</TextStyle>
+            </div>
           </Card>
         </Layout.AnnotatedSection>
       </Layout>
@@ -17,4 +19,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Example;
