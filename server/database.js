@@ -22,7 +22,7 @@ async function storeCallback(session) {
     }
 
     connection.query(
-      `INSERT INTO shop (shop_url,session_id,domain_id, access_token, state, isOnline, onlineAccessInfo, scope) VALUES ('${data.shop}','${shop.id}','${domain_id}','${data.accessToken}', '${data.state}', '${data.isOnline}', '${data.onlineAccessInfo}', '${data.scope}') ON DUPLICATE KEY UPDATE access_token='${data.accessToken}',state='${data.state}',session_id='${data.id}',domain_id='${domain_id},scope='${data.scope}', onlineAccessInfo='${data.onlineAccessInfo}'`,
+      `INSERT INTO shop (shop_url, session_id, domain_id, access_token, state, isOnline, onlineAccessInfo, scope) VALUES ('${data.shop}','${data.id}','${domain_id}','${data.accessToken}', '${data.state}', '${data.isOnline}', '${data.onlineAccessInfo}', '${data.scope}') ON DUPLICATE KEY UPDATE access_token='${data.accessToken}',state='${data.state}',session_id='${data.id}',domain_id='${domain_id}',scope='${data.scope}', onlineAccessInfo='${data.onlineAccessInfo}'`,
       function (error, results, fields) {
         if (error) throw error;
       }
@@ -69,7 +69,7 @@ async function loadCallback(id) {
 
 async function deleteCallback(id) {
   try {
-    return false;
+    return true;
   } catch (error) {
     throw new Error(error);
   }
